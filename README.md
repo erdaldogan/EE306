@@ -1,2 +1,2 @@
 # EE306
-Assignments/HWs for Microprocessors course, Fall 2019 @MEFUniversity
+Assignments/HWs for Microprocessors course, Spring 2020 @MEFUniversity
