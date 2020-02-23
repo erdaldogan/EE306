@@ -7,7 +7,7 @@ _start:
         MOV R0, #0 // R0 will hold the result
         MOV R2, R8
 LOOP:
-        CMP R2, #0 // loop until the data contains no more 1's
+        CMP R2, #0 // loop until the data contains no more 1’s
         BEQ CONT
         AND R3, R2, #1
         LSR R2, R2, #1 // perform SHIFT, followed by AND  
