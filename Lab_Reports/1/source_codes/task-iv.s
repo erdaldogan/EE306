@@ -1,0 +1,33 @@
+.global _start 
+_start: 
+LDR R8, TEST_NUM // load the data word into R1
+        LDR R10, AND_NUM1
+        LDR R11, OR_NUM1
+        LDR R12, OR_NUM2
+MOV R0, #0 // R0 will hold the result
+        MOV R2, R8
+LOOP: CMP R2, #0 // loop until the data contains no more 1’s 
+        BEQ CONT
+AND R3, R2, #1
+        LSR R2, R2, #1 // perform SHIFT, followed by AND  
+ADD R0, R0, R3 // count the string lengths so far
+B LOOP
+        
+EVEN:	
+AND R8, R8, R10
+        ORR R8, R8, R11
+        B END
+        
+CONT: 
+ANDS R3, R0, #1
+        BEQ EVEN
+        AND R8, R8, R10
+        ORR R8, R8, R12
+
+
+END:	B END
+TEST_NUM: .word 0xAAAAAAAB
+AND_NUM1: .word 0x7FFFFFFE
+OR_NUM1: .word 0x80000000
+OR_NUM2: .word 0x00000001
+.end
