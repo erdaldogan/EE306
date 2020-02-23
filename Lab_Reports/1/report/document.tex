@@ -11,14 +11,14 @@
 
 \date{}
 \author{Erdal Sidal Dogan\\ \#041702023  \and Alp
-	Gokcek \\ \#31}
+	Gokcek \\ \#041701014}
 \title{\includegraphics[width=0.6\textwidth]{../images/logo_en_color.png}\\ 
 \vspace{3em}
 EE306 - Microprocessors\\
 \vspace{2em}
 \textbf{Lab 1 \textbackslash\textbackslash{}
 February 17, 2020}\\
-*** buraya konu gelecek ***}
+*** buraya konu gelecek allaha dua ediyoruz gelmesi için ***}
 
 \begin{document}
 	\maketitle
@@ -53,5 +53,6 @@ February 17, 2020}\\
 	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for finding longest string of alternating 1's and 0's]{../source_codes/task-iii.s}
 
 	\section{Parity Bit}
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= caption]{../source_codes/task-iv.s}
+	Our approach for this problem was to sum all the bits in the binary number and check whether it is odd or even. In the first part, we have calculated the bitwise sum of all bits in the given number. We have taken the bitwise \emph{AND} operation of the input string with hexadecimal number 0x1 and stored the result in a register. Given that AND operation of 1 with another bit always results in the other bits value, when we AND the input with the 1, we get the value of LSB (least significant bit). Then we shifted the input string to the right by 1 bit which cleared the LSB. In the final part of the calculating bitwise sum of all bits in the input string, we add the result of \emph{AND} operation that stored in a register with the current value of the sum of bits. This process continues until the input string is equal to hexadecimal number 0x0. In the last part, we checked whether the sum of all bits LSB is 1 or 0. If it is 1 then the sum is odd which makes the even parity bit 1 and odd parity bit 0. If it is 0 then the sum is even which makes the even parity bit 0 and the odd parity bit 1. After checking last bit we did clear the MSB (most significant bit) and LSB and calculated the logical \emph{OR} operation with hexadecimal number 0x80000000 if the even parity bit is 1, else we ORed with hexadecimal number 0x00000001. \\
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for finding the odd and even parity bits]{../source_codes/task-iv.s}
 \end{document}
