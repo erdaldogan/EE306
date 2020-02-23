@@ -22,7 +22,6 @@ CONT:
         ORR R8, R8, R12
 END:
         B END
-
 TEST_NUM: .word 0xAAAAAAAB
 AND_NUM1: .word 0x00000000
 OR_NUM1: .word 0x80000000 //even parity bit

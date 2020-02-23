@@ -12,7 +12,6 @@ LOOP:
         AND R1, R1, R2
         ADD R0, #1 // count the string lengths so far
         B LOOP
-        
         LDR R1, TEST_NUM // load the data word into R3
         LDR R3, CONSECUTIVE_ALTERNATING1 // load the alternating word into R3
         MOV R0, #0 // R0 will hold the result
@@ -23,14 +22,12 @@ LOOP1:
         AND R1, R1, R2
         ADD R0, #1 // count the string lengths so far
         B LOOP1
-        
 COMPARE_RESULTS:
         CMP R0, R4
         MOVLT R0, R4
         MOV R4, #0
 END:
         B END
-
 TEST_NUM: .word 0x103fe05f
 CONSECUTIVE_ALTERNATING: .word 0xAAAAAAAA
 CONSECUTIVE_ALTERNATING1: .word 0x55555555
