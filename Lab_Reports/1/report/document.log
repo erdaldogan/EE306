@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.29)  23 FEB 2020 16:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.29)  23 FEB 2020 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -353,10 +353,10 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count126
-<logo_en_color.png, id=1, 137.7948pt x 76.6062pt>
-File: logo_en_color.png Graphic file (type png)
-<use logo_en_color.png>
-Package pdftex.def Info: logo_en_color.png  used on input line 24.
+<../images/logo_en_color.png, id=1, 137.7948pt x 76.6062pt>
+File: ../images/logo_en_color.png Graphic file (type png)
+<use ../images/logo_en_color.png>
+Package pdftex.def Info: ../images/logo_en_color.png  used on input line 24.
 (pdftex.def)             Requested size: 276.39288pt x 153.67255pt.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
@@ -366,8 +366,8 @@ LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <17.28> not available
 (Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 24.
  [1
 
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./logo_
-en_color.png>]
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../imag
+es/logo_en_color.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
@@ -382,28 +382,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 51--52
 
  []
 
-(./source_codes/task-iii.s
+(../source_codes/task-iii.s
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
- [1]) (./source_codes/task-iv.s) [2] (./document.aux) ) 
+ [1]) (../source_codes/task-iv.s) [2]
+(./document.aux) ) 
 Here is how much of TeX's memory you used:
- 10107 strings out of 492616
- 135238 string characters out of 6129480
- 526172 words of memory out of 5000000
+ 10108 strings out of 492616
+ 135299 string characters out of 6129480
+ 525246 words of memory out of 5000000
  13952 multiletter control sequences out of 15000+600000
  9484 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,43p,627b,5298s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2019/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (3 pages, 145602 bytes).
+ 41i,9n,43p,695b,5298s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr5.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb>
+Output written on document.pdf (3 pages, 145721 bytes).
 PDF statistics:
  49 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream
