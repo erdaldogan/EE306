@@ -6,6 +6,7 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{lstlangarm}
+\usepackage{tabu}
 
 
 \date{}
@@ -22,8 +23,35 @@ February 17, 2020}\\
 \begin{document}
 	\maketitle
 	\section{Longest Alternating Strings}
+	Our approach for this problem was to utilize the \emph{XOR} operation. We XORed the input string with another string that consist of alternating 1's and 0's. Given that XOR of two different bits always results in 1, when we XOR the input  with the alternating string, longest sequence of 1's in the output should give the longest sequence of alternating bits in the input also. The problem is that we didn't knew wheter the first bit of longest alternating string was 1 or 0.  This was a problem because the answer was either the length of longest sequence of 0's or 1's inthe output string, depending on the first bit of alternating sequence in input string.  \\
+	
+	\begin{minipage}{0.5\textwidth}
+		\begin{equation*}
+			\begin{tabular}{r@{\;}r}
+				& 101101010001  \\
+				\tiny{XOR} & 101010101010\\
+				\hline
+				& 000111111011
+			\end{tabular}
+		\end{equation*}
+	\end{minipage}
+	\quad
+	\begin{minipage}{0.35\textwidth}
+		\begin{equation*}
+				\begin{tabular}{r@{\;}r}
+				& 101101010001  \\
+				\tiny{XOR} & 010101010101\\
+				\hline
+				& 111000000100
+			\end{tabular}
+		\end{equation*}
+	\end{minipage}
+	\\
+
+	Above you can see the input string 101101010001 is being XORed with two alternating strings, one of them starts with 1 and other with 0. Using two alternating strings is to address the problem mentioned in previous paragraph, unknown start bits of the longest alternating string. What we did in order to solve this problem is, we used XOR operation for two different alternating strings. We know that the lenght of the longest sequence of 1's in the result of XOR operation is equal to the lenght of longest alternating bits in the input. We count length of longest sequence of 1's in both XOR outputs, the greater number is our answer.\\
+	
 	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for finding longest string of alternating 1's and 0's]{source_codes/task-iii.s}
-	\newpage
+
 	\section{Parity Bit}
 	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= caption]{source_codes/task-iv.s}
 \end{document}

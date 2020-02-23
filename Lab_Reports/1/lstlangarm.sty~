@@ -2,9 +2,8 @@
              [2013/10/20 1.0 listings language file for ARM]
 
              \usepackage{xcolor}
-             \definecolor{opcode-purple}{RGB}{127,4,127}
+             \definecolor{keyword-purple}{RGB}{127,4,127}
              \definecolor{comment-red}{RGB}{160,17,27}
-             \definecolor{keyword-blue}{RGB}{19,0,254}
 %%
 %% ARM definition (c) 2013 Jacques Supcik
 %%
@@ -427,12 +426,13 @@
       .text,.thumb,.thumb_func,.thumb_set,.title,.tlsdescseq,.type,.uleb128,  %
       .unreq,.unwind_raw,.val,.version,.vsave,.vtable_entry,.vtable_inherit,  %
       .warning,.weak,.weakref,.word},%
-    keywordstyle=\color{keyword-blue},%
+    keywordstyle=\color{keyword-purple}\bfseries,%
+    commentstyle=\color{comment-red}, columns=fullflexible,%
     alsoletter={.,0,1,2,3,4,5,6,7,8,9},%
     alsodigit={?},%
     sensitive=false,%
     morestring=[b]",%
-    morecomment=[s][comment-red]{/*}{*/},%
-    morecomment=[l][\color{comment-red}]{//},
+    morecomment=[s][commentstyle]{/*}{*/},%
+    morecomment=[l][commentstyle]{//},
    }[keywords,comments,strings]
 \endinput
