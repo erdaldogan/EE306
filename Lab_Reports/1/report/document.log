@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.29)  23 FEB 2020 19:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.7)  24 FEB 2020 14:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -292,18 +292,18 @@ e
 (./document.aux)
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -360,29 +360,23 @@ Package caption Info: End \AtBeginDocument code.
 <../images/logo_en_color.png, id=1, 137.7948pt x 76.6062pt>
 File: ../images/logo_en_color.png Graphic file (type png)
 <use ../images/logo_en_color.png>
-Package pdftex.def Info: ../images/logo_en_color.png  used on input line 24.
+Package pdftex.def Info: ../images/logo_en_color.png  used on input line 26.
 (pdftex.def)             Requested size: 276.39288pt x 153.67255pt.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <17.28> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 24.
- [1
+[1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../imag
 es/logo_en_color.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--50
+Underfull \hbox (badness 10000) in paragraph at lines 30--52
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
 
  []
 
@@ -391,38 +385,37 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
  [1])
 Package epstopdf Info: Source file: <../images/task-iii.eps>
-(epstopdf)                    date: 2020-02-23 19:54:53
+(epstopdf)                    date: 2020-02-24 12:14:54
 (epstopdf)                    size: 140227 bytes
 (epstopdf)             Output file: <./task-iii-eps-converted-to.pdf>
-(epstopdf)                    date: 2020-02-23 19:56:01
+(epstopdf)                    date: 2020-02-24 12:14:54
 (epstopdf)                    size: 38758 bytes
 (epstopdf)             Command: <repstopdf --outfile=./task-iii-eps-converted-t
 o.pdf ../images/task-iii.eps>
-(epstopdf)             \includegraphics on input line 57.
+(epstopdf)             \includegraphics on input line 59.
 Package epstopdf Info: Output file is already uptodate.
-<./task-iii-eps-converted-to.pdf, id=20, 1145.27875pt x 349.305pt>
+<./task-iii-eps-converted-to.pdf, id=19, 1145.27875pt x 349.305pt>
 File: ./task-iii-eps-converted-to.pdf Graphic file (type pdf)
 <use ./task-iii-eps-converted-to.pdf>
-Package pdftex.def Info: ./task-iii-eps-converted-to.pdf  used on input line 57
+Package pdftex.def Info: ./task-iii-eps-converted-to.pdf  used on input line 59
 .
 (pdftex.def)             Requested size: 458.10338pt x 139.71951pt.
  (../source_codes/task-iv.s [2 <./task-iii-eps-converted-to.pdf>])
-<../images/flowchart_2.jpg, id=40, 499.8675pt x 402.50375pt>
+<../images/flowchart_2.jpg, id=39, 499.8675pt x 402.50375pt>
 File: ../images/flowchart_2.jpg Graphic file (type jpg)
 <use ../images/flowchart_2.jpg>
-Package pdftex.def Info: ../images/flowchart_2.jpg  used on input line 67.
+Package pdftex.def Info: ../images/flowchart_2.jpg  used on input line 69.
 (pdftex.def)             Requested size: 299.9228pt x 241.5041pt.
  [3 <../images/flowchart_2.jpg>] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 10128 strings out of 492616
- 135866 string characters out of 6129480
- 526817 words of memory out of 5000000
- 13967 multiletter control sequences out of 15000+600000
- 9484 words of font info for 35 fonts, out of 8000000 for 9000
+ 10109 strings out of 492623
+ 135533 string characters out of 6129553
+ 526578 words of memory out of 5000000
+ 13945 multiletter control sequences out of 15000+600000
+ 9229 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,9n,43p,1372b,5298s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/local/texlive/2019/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-di
@@ -430,10 +423,10 @@ st/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2019/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (4 pages, 214687 bytes).
+Output written on document.pdf (4 pages, 207423 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
