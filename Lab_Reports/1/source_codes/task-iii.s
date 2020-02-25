@@ -8,7 +8,7 @@ _start:
 LOOP:
         CMP R1, #0 // loop until the data contains no more 1's
         MOV R4, R0
-        BEQ INIT_LOOP1 // branch to initialize the second alternating word and reset the data word
+        BEQ INIT_LOOP1 // branch to initialize the second loop's words
         LSR R2, R1, #1 // perform SHIFT, followed by AND
         AND R1, R1, R2
         ADD R0, #1 // count the string lengths so far

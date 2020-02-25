@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.7)  24 FEB 2020 14:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.7)  25 FEB 2020 21:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -409,8 +409,8 @@ Package pdftex.def Info: ../images/flowchart_2.jpg  used on input line 69.
  [3 <../images/flowchart_2.jpg>] (./document.aux) ) 
 Here is how much of TeX's memory you used:
  10109 strings out of 492623
- 135533 string characters out of 6129553
- 526578 words of memory out of 5000000
+ 135539 string characters out of 6129553
+ 530714 words of memory out of 5000000
  13945 multiletter control sequences out of 15000+600000
  9229 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -423,7 +423,7 @@ st/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2019/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (4 pages, 207423 bytes).
+Output written on document.pdf (4 pages, 208471 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  41 compressed objects within 1 object stream
