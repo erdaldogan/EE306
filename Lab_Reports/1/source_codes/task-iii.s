@@ -3,7 +3,7 @@ _start:
         LDR R1, TEST_NUM // load the data word into R1
         LDR R3, CONSECUTIVE_ALTERNATING // load the alternating word into R3
         MOV R0, #0 // R0 will hold the result and first loop's result
-        MOV R4, #0 // R0 will hold the second loop's result
+        MOV R4, #0 // R4 will hold the second loop's result
         EOR R1, R1, R3 // XORed data word with alternating word
 LOOP:
         CMP R1, #0 // loop until the data contains no more 1's
