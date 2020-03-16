@@ -1,7 +1,6 @@
 .include    "address_map_arm.s"
 .text                       
 .global     _start
-
 _start: 
         LDR R0, N // load the data word into R0
         MOV R1, #0 // temp register
