@@ -29,9 +29,7 @@ March 17, 2020}
 	
 	First step is to store the value that we are going to sum up to $(N)$ in the R0 register. Then, we load $0$ to the R1. It will be used as temporary register during the summation process, later on we will move the value of the R1 to the R0 since it has been specifically requested to store the result in R0. \\
 	
-	Subroutine \texttt{FINDSUM} adds current value of R1 to R0, then decreases the value of the R0 by 1. Finally, checks if the R0 is equal to 0. If no; repeats the same sequence. If yes; it's job is done. \\
-	
-	After \texttt{FINDSUM} finishes its operation, we move the result from R1 to R0 and end the program.
+	Subroutine \texttt{FINDSUM} adds current value of R1 to R0, then decreases the value of the R0 by 1. Finally, checks if the R0 is equal to 0. If no; repeats the same sequence. If yes; it's job is done. After \texttt{FINDSUM} finishes its operation, we move the result from R1 to R0 and end the program.
 	
 	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for Sigma sum \& calculating average]{../source_codes/task-iii.s} \label{part3code}
 	

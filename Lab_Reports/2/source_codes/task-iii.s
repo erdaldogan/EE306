@@ -5,6 +5,7 @@ _start:
         LDR R0, N // load the data word into R0
         MOV R1, #0 // temp register
         BL FINDSUM
+	LSL R1, R1, #5 // average of 32 numbers
         MOV R0, R1 // move result from R1 to R0
         B END
 FINDSUM:
