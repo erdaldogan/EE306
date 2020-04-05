@@ -23,14 +23,14 @@ April 10, 2020}
 
 \begin{document}
 	\maketitle
-	\section{Sigma Sum}
-	In this experiment 
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for Sigma sum \& calculating average]{../source_codes/task-iii.s} \label{part3code}
+	\section{Part I - Display HEX on 7-Segment Display}
+	In this experiment, I've converted each hexadecimal number from 0-a into their 7-segment equivalent and stored in memory. We have 4 buttons which are for display 0, increment displayed number, decrement displayed number and blank displayed number respectively. I have created a pointer and on each key click, I change this pointer according to the key clicked.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for displaying hex numbers on 7-segment display]{../source_codes/task-i.s} \label{part1code}
 	
-	
-	\newpage
-	\section{Part IV - Bubble Sort}
-	In this experiment 
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for bubble sort algorithm]{../source_codes/task-iv.s} \label{part4code}
-
+	\section{Part II - Display Group ID on 7-Segment Display}
+	In this experiment, I've stored "GrouP0" on the memory in a form that to be shown on the 7-segment display. Since it has 6 digits, we had to split into 2 rows cause it exceeds 32 bits. First row consists $HEX_{3}$ to $HEX_{0}$  and second row consists $HEX_{5}$ and $HEX_{4}$. Therefore, in first row I have stored "ouP0" and in second row I have stored "Gr". In execution, I summed first row with the class id to update our class id and show on 7-segment display.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for displaying group id on 7-segment display]{../source_codes/task-ii.s} \label{part2code}
+	\section{Part III - Display 2 Words with Delay}
+	In this experiment, I have converted words assigned to me which are "SEt" and "tıme" to 7-segment form and change between these numbers after some delay. I have created a flag to check which word is currently showed on 7-segment display. If any key is pressed, then it stops switching words.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for displaying 2 words with delay]{../source_codes/task-iii.s} \label{part3code}
 \end{document}
