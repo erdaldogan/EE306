@@ -1,0 +1,67 @@
+.global _start
+_start:
+	LDR R0, =0xFF200020 // 7-segment address
+	LDR R1, =0xFF200030 // 7-segment address
+	LDR R4, =0xFF200050 // pushbutton address
+	
+LOOP:
+	BL DELAY
+	CMP [R4], #0
+	BLNE DISPLAY_SET
+	BL DELAY
+	CMP [R4], #0
+	BLNE DISPLAY_ALARM
+	BL DELAY
+	CMP [R4], #0
+	BLNE DISPLAY_SET
+	BL DELAY
+	CMP [R4], #0
+	BLNE DISPLAY_TIME
+	B LOOP
+
+DISPLAY_SET:
+	LDR R2, =SET // sequential digits
+	LDR R3, [R2]
+	STR R3, [R0]
+	LDR R3, [R2, #4]
+	STR R3, [R1]
+    BX LR
+
+DISPLAY_TIME:
+	LDR R2, =TIME // sequential digits
+	LDR R3, [R2]
+	STR R3, [R0]
+	LDR R3, [R2, #4]
+	STR R3, [R1]
+	BX LR
+
+DISPLAY_ALARM:
+	LDR R2, =ALARM // sequential digits
+	LDR R3, [R2]
+	STR R3, [R0]
+	LDR R3, [R2, #4]
+	STR R3, [R1]
+    BX LR
+
+DELAY:
+    LDR R12, =1200000 // delay counter
+   	SUB_LOOP:
+        SUBS R12, R12, #1
+        BNE SUB_LOOP
+    BX LR
+
+HOLD:
+	LDR R11, [R4]
+	CMP R11, #0
+	BXNE LR
+
+END: B END
+SET: .byte 0x78, 0x79, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00 
+//extra zeros are for misalignment issues, notice they complement 8 bytes.
+ALARM: .byte 0x37, 0x37, 0x50, 0x77, 0x38, 0x77, 0x00, 0x00
+TIME: .byte 0x79, 0x37, 0x37, 0x06, 0x78, 0x00
+.end
+
+
+
+
