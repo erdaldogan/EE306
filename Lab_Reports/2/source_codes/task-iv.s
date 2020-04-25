@@ -1,33 +1,28 @@
-.text
-.global start
-start:  LDR R8, =LIST //holds the address of the list
-        ADD R0, R8,#4 // points to first element 
-        LDR R1, [R8] // number of elements
-        MUL R4, R1, #4 // for calculating the latest address
-        BL INIT_SORT
-        SUB R0, R0, R4 //returing to the first element
+.global _start 
+_start: 
+        LDR R1, TEST_NUM // load the data word into R1
+        LDR R8,  RESULT // r8 will hold the result
+        LDR R11, OR_NUM1 //odd parity bit = 1, even parity bit = 0
+        LDR R12, OR_NUM2 //odd parity bit = 0, even parity bit = 1
+        MOV R0, #0 // initialized accumulator
+LOOP:
+        CMP R1, #0 // loop until the data contains no more 1's
+        BEQ CONT
+        AND R3, R1, #1 // take the last bit
+        LSR R2, R1, #1 // perform SHIFT, followed by AND  
+        ADD R0, R0, R3 // add the current bit to accumulator
+        B LOOP
+EVEN:	
+        ORR R8, R8, R11 // put OR_NUM1 as the result
         B END
-INIT_SORT:PUSH {LR}
-SORT:   PUSH {R0, R1} // save number of elements and pointer
-        MOV R12, #0 // flag
-BUBBLE_SORT:SUBS R1, R1,#1 // decrement number of elements
-        BEQ CHECK //branch if number of elements is 0
-        LDR R2, [R0] //element 1
-        LDR R3, [R0, #4]! //element 2
-        CMP R2, R3 //compare two elements and swap them if needed
-        BGE BUBBLE_SORT // if r2 is greater than or equal to r3, continue to traverse
-        BL SWAP // if element 1 is less than element 2 then swap
-        B BUBBLE_SORT //continue to traverse after sorting 
-SWAP:   STR R2, [R0]
-        STR R3, [R0, #-4]
-        MOV R12, #1 // update flag
-        BX LR
-CHECK:  POP {R0, R1} // restore number of elements and pointer
-        SUB R1, R1,#1 // decrement number of elements
-        CMP R12, #1 // checking if anything sorted
-        POPNE {LR} // restore link register if list is sorted
-        BXNE LR // return to link register if sorted
-        B SORT //continue to sort if not sorted
-END:    B END 
-LIST: .word 10,0,1,2,3,4,5,6,7,8,9
+CONT: 
+        ANDS R3, R0, #1 // last bit indicates whether sum is even or odd
+        BEQ EVEN // if sum is even then branch
+        ORR R8, R8, R12 // put OR_NUM2 as the result
+END:
+        B END
+TEST_NUM: .word 0xAAAAAAAB
+RESULT: .word 0x00000000
+OR_NUM1: .word 0x80000000 //odd parity bit = 1
+OR_NUM2: .word 0x00000001 //even parity bit = 1
 .end

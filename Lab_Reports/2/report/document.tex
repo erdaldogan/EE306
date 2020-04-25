@@ -17,40 +17,57 @@
 \vspace{5em}
 EE306 - Microprocessors\\
 \vspace{2em}
-\textbf{Laboratory Exercise 3 \linebreak Subroutines
+\textbf{Lab 1 \linebreak Using Logic Instructions with the ARM Processor
 }\\
 \vspace{1.5em}
-March 17, 2020}
+February 17, 2020}
 
 \begin{document}
 	\maketitle
-	\section{Sigma Sum}
-	In this experiment we wrote an assembly program that finds the mean of given set of numbers, length of the number sequence is defined as $N$. Listing \ref{part3code} below calculates the result of the following expression $\sum_{i=0}^{N}i$\\
+	\section{Longest Alternating Strings}
+	Our approach for this problem was to utilize the \emph{XOR} operation. We XORed the input string with another string that consist of alternating 1's and 0's. Given that XOR of two different bits always results in 1, when we XOR the input  with the alternating string, longest sequence of 1's in the output should give the longest sequence of alternating bits in the input also. The problem is that we didn't knew wheter the first bit of longest alternating string was 1 or 0.  This was a problem because the answer was either the length of longest sequence of 0's or 1's inthe output string, depending on the first bit of alternating sequence in input string.  \\
 	
-	First step is to store the value that we are going to sum up to $(N)$ in the R0 register. Then, we load $0$ to the R1. It will be used as temporary register during the summation process, later on we will move the value of the R1 to the R0 since it has been specifically requested to store the result in R0. \\
+	\begin{minipage}{0.5\textwidth}
+		\begin{equation*}
+			\begin{tabular}{r@{\;}r}
+				& 101101010001  \\
+				\tiny{XOR} & 101010101010\\
+				\hline
+				& 000111111011
+			\end{tabular}
+		\end{equation*}
+	\end{minipage}
+	\quad
+	\begin{minipage}{0.35\textwidth}
+		\begin{equation*}
+				\begin{tabular}{r@{\;}r}
+				& 101101010001  \\
+				\tiny{XOR} & 010101010101\\
+				\hline
+				& 111000000100
+			\end{tabular}
+		\end{equation*}
+	\end{minipage}
+	\\
+
+	Above you can see the input string 101101010001 is being XORed with two alternating strings, one of them starts with 1 and other with 0. Using two alternating strings is to address the problem mentioned in previous paragraph, unknown start bits of the longest alternating string. What we did in order to solve this problem is, we used XOR operation for two different alternating strings. We know that the lenght of the longest sequence of 1's in the result of XOR operation is equal to the lenght of longest alternating bits in the input. We count length of longest sequence of 1's in both XOR outputs, the greater number is our answer.\\
 	
-	Subroutine \texttt{FINDSUM} adds current value of R1 to R0, then decreases the value of the R0 by 1. Finally, checks if the R0 is equal to 0. If no; repeats the same sequence. If yes; it's job is done. After \texttt{FINDSUM} finishes its operation, we move the result from R1 to R0 and end the program.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for finding longest string of alternating 1's and 0's]{../source_codes/task-iii.s}
 	
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for Sigma sum \& calculating average]{../source_codes/task-iii.s} \label{part3code}
-	
-	\begin{figure}[h]
+		\begin{figure}[th]
 		\centering
-		\includegraphics[scale=.45]{../images/task-iii.pdf}
-		\caption{Flowchart of the Listing \ref{part3code}}
+		\includegraphics[scale=.4]{../images/task-iii.eps}
+		\caption{Longest Sequnce of Alternating 1's and 0's Flowchart}
 	\end{figure}
+
+	\section{Parity Bit}
+	Our approach for this problem was to sum all the bits in the binary number and check whether it is odd or even. In the first part, we have calculated the bitwise sum of all bits in the given number. We have taken the bitwise \emph{AND} operation of the input string with hexadecimal number 0x1 and stored the result in a register. Given that AND operation of 1 with another bit always results in the other bits value, when we AND the input with the 1, we get the value of LSB (least significant bit). Then we shifted the input string to the right by 1 bit which cleared the LSB. In the final part of the calculating bitwise sum of all bits in the input string, we add the result of \emph{AND} operation that stored in a register with the current value of the sum of bits. This process continues until the input string is equal to hexadecimal number 0x0. In the last part, we checked whether the sum of all bits LSB is 1 or 0. If it is 1 then the sum is odd which makes the even parity bit 1 and odd parity bit 0. If it is 0 then the sum is even which makes the even parity bit 0 and the odd parity bit 1. After checking last bit we did clear the MSB (most significant bit) and LSB and calculated the logical \emph{OR} operation with hexadecimal number 0x80000000 if the even parity bit is 1, else we ORed with hexadecimal number 0x00000001. 
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for finding the odd and even parity bits]{../source_codes/task-iv.s}
 	
-	\newpage
-	\section{Part IV - Bubble Sort}
-	In this experiment we wrote an assembly program that sorts the given numbers using bubble sort algorithm. First step is to create a pointer to the memory location that will be sorted and after that load the number of values that will be sorted which placed as the first element of that memory location. Then, we create a pointer to the first element of the list that will be sorted and then we started the sorting subroutine.\\
-	In the sorting subroutine's initialization part, we save the link register's value for one time then save the content of R0 and R1 and update the value of flag register as 0. Flag register is used for checking whether any item is sorted on that traverse. After initialization, algorithm checks whether we traversed the whole list or not. If we traversed the whole list, then we branch to checking part. If not, algorithm loads 2 items to be compared from memory and check whether first element is greater or equal to second element. If yes, continue to traverse, else, start swapping subroutine. If no, continue to traverse.\\
-	In swapping subroutine, we store the first element in second elements memory location and store second element in first elements memory location. Then, we update the status flag and return to sorting subroutine.\\
-	On checking part, we restore the content of R0 and R1 and decrement R1 which holds the number of elements. After that, we check whether we swapped anything on that traverse. If yes, branch to sorting subroutine, else, restore link register and update R0 to hold the first elements position on memory.
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for bubble sort algorithm]{../source_codes/task-iv.s} \label{part4code}
-		
-	\begin{figure}[h]
+	\begin{figure}[th]
 		\centering
-		\includegraphics[scale=.45]{../images/task-iv.pdf}
-		\caption{Flowchart of the Listing \ref{part4code}}
+		\includegraphics[scale=.6]{../images/flowchart_2.jpg}
+		\caption{Parity Bit detection flowchart}
 	\end{figure}
 
 \end{document}
