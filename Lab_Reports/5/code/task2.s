@@ -9,7 +9,7 @@ _start:
     LDR R1, =0xFF200020 // 7-segment address
     LDR R2, =0xFF200050 // push button address
     LDR R4, =SEQUENCE // sequential digits
-    B SET_TO_ZERO
+    B SET_TO_ZERO // start from zero
 
 LOOP:
     BL HOLD_ON // checks if it should wait or not
@@ -17,6 +17,7 @@ LOOP:
     B LOOP
 
 INCREMENT_MS:
+    BL DELAY
     LDRB R6, [R4, R5]
     STRB R6, [R1] //rightmost digit
     LDRB R7, [R4, R10]
@@ -28,7 +29,6 @@ INCREMENT_MS:
     CMP R10, #10
     MOVEQ R10, #0
     BEQ INCREMENT_SEC
-    BL DELAY
     B LOOP
 
 INCREMENT_SEC:
@@ -47,9 +47,10 @@ INCREMENT_SEC:
 DELAY:
     LDR R3, [R0, #0xC]
     CMP R3, #1
-    STREQ R3, [R0, #0xC] // reset status flag.
-    BXEQ LR
-    B DELAY
+    BNE DELAY
+    STR R3, [R0, #0xC] // reset status flag.
+    BX LR
+    
     
 SET_TO_ZERO:
     MOV R5, #0 // array index
@@ -60,11 +61,10 @@ SET_TO_ZERO:
     
 HOLD_ON:
     LDR R6, [R2]
-    CMP R6, #0xfffffff0
+    CMP R6, #0
     BNE HOLD_ON
     BX LR
     
-
 SEQUENCE: .byte 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0xFF, 0xEF
 // 0 = 0x3F, Array Index: 0
 // 1 = 0x06, Array Index: 4
