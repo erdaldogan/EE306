@@ -7,17 +7,13 @@ _start:
     STR R2, [R0, #8] //set config bits
     
     LDR R1, =0xFF200020 // 7-segment address
-    LDR R2, =0xFF200030
+    LDR R2, =0xFF200050 // push button address
     LDR R4, =SEQUENCE // sequential digits
-    MOV R5, #0 // array index
-    MOV R10, #0
-    MOV R11, #0
-    MOV R12, #0
-    B LOOP
+    B SET_TO_ZERO
 
 LOOP:
+    BL HOLD_ON // checks if it should wait or not
     BL INCREMENT_MS
-
     B LOOP
 
 INCREMENT_MS:
@@ -33,13 +29,13 @@ INCREMENT_MS:
     MOVEQ R10, #0
     BEQ INCREMENT_SEC
     BL DELAY
-    B INCREMENT_MS
+    B LOOP
 
 INCREMENT_SEC:
     LDRB R8, [R4, R11]
     STRB R8, [R1, #3] //third to left
     LDRB R9, [R4, R12]
-    STRB R9, [R2] //second to left
+    STRB R9, [R1, #0b10000] //second to left
     ADD R11, R11, #1
     CMP R11, #10
     MOVEQ R11, #0
@@ -60,7 +56,13 @@ SET_TO_ZERO:
     MOV R10, #0
     MOV R11, #0
     MOV R12, #0
-    B DELAY
+    B LOOP
+    
+HOLD_ON:
+    LDR R6, [R2]
+    CMP R6, #0xfffffff0
+    BNE HOLD_ON
+    BX LR
     
 
 SEQUENCE: .byte 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0xFF, 0xEF
@@ -75,6 +77,3 @@ SEQUENCE: .byte 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0xFF, 0xEF
 // 8 = 0xFF, Array Index: 20
 // 9 = 0xEF, Array Index: 24
 .end
-
-
-
