@@ -11,14 +11,15 @@ _start:
 LOOP:
 	STR R11, [R12] //turn on
 	BL DELAY
-	EOR R11, R11, #1
+	EOR R11, R11, #1 //switch the state of led
 	B LOOP
 
 DELAY:
-	LDR R4, [R1, #0xC]
-	CMP R4, #1
-	STREQ R4, [R1, #0xC] // reset status flag. 
-	BXEQ LR
-	B DELAY
-
+	LDR R4, [R1, #0xC] // read the interrupt status bit
+	CMP R4, #1 // 1 when load register reaches 0
+	BNE DELAY
+	STR R4, [R1, #0xC] // reset interrupt status bit 
+	BX LR
+	
 .end
+

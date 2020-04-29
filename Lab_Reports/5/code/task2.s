@@ -13,15 +13,15 @@ _start:
 
 LOOP:
     BL HOLD_ON // checks if it should wait or not
-    BL INCREMENT_MS
+    BL INCREMENT_MS // increment miliseconds
     B LOOP
 
 INCREMENT_MS:
     BL DELAY
-    LDRB R6, [R4, R5]
-    STRB R6, [R1] //rightmost digit
+    LDRB R6, [R4, R5] // 
+    STRB R6, [R1] // rightmost digit
     LDRB R7, [R4, R10]
-    STRB R7, [R1, #1] //second to right
+    STRB R7, [R1, #1] // second to right
     ADD R5, R5, #1
     CMP R5, #10
     ADDEQ R10, R10, #1
@@ -33,9 +33,9 @@ INCREMENT_MS:
 
 INCREMENT_SEC:
     LDRB R8, [R4, R11]
-    STRB R8, [R1, #3] //third to left
+    STRB R8, [R1, #3] // third to left
     LDRB R9, [R4, R12]
-    STRB R9, [R1, #0b10000] //second to left
+    STRB R9, [R1, #0b10000] // second to left
     ADD R11, R11, #1
     CMP R11, #10
     MOVEQ R11, #0
@@ -50,7 +50,6 @@ DELAY:
     BNE DELAY
     STR R3, [R0, #0xC] // reset status flag.
     BX LR
-    
     
 SET_TO_ZERO:
     MOV R5, #0 // array index
