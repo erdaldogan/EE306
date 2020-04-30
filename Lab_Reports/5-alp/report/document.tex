@@ -1,0 +1,36 @@
+\documentclass[titlepage]{article}
+\usepackage[tc]{titlepic}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[top=25mm, bottom=25mm, left=27mm, right=27mm]{geometry}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{lstlangarm}
+\usepackage{tabu}
+\usepackage[outdir=./]{epstopdf}
+
+
+\date{}
+\author{Alp Gokcek \\ \#041701014}
+\title{\includegraphics[width=0.6\textwidth]{../images/logo_en_color.png}\\ 
+\vspace{5em}
+EE306 - Microprocessors\\
+\vspace{2em}
+\textbf{Laboratory Exercise 5 \linebreak Input/Output in an Embedded System
+}\\
+\vspace{1.5em}
+May 1, 2020}
+
+\begin{document}
+	\maketitle
+	\section{Part I - Blink LED in 0.25 second Intervals}
+	  In this experiment, I've used polled I/O to make the processor wait for the timer for 0.25 second intervals. Since our processor's frequency is 200 MHz, to make it wait for 0.25 seconds, we need to solve the equation $(1/200 MHz)* x = 0.25s$ for $x$. From the equation, we find $x$ to be equal to 50000000. We load this item and set the control bits and jump to main loop.\\
+	  \textbf{Important Note:} While running this assembly code on CPUlator, "Function clobbered callee-saved register" interrupt must be disabled.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption=Assembly Code for blinking LEDs in 0.25 seconds]{../source_codes/task-i.s} \label{part1code}
+	
+	\section{Part II - Real-Time Clock}
+	In this experiment, I've converted each decimal number from 0-9 into their 7-segment equivalent and stored in memory. In each 0.01 second interval, I have incremented the number displayed on the 7-segment display by 1. There are four pointers for each $HEX_{3-0}$ display, and it gets updated while in each 0.01 second time interval. We also have several push-buttons, and if at least one of them is pressed, until the time that all of the buttons get on the unpressed state, the timer stops.\\
+	\textbf{Important Note:} While running this assembly code on CPUlator, "Function clobbered callee-saved register" interrupt must be disabled.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code for real-time clock]{../source_codes/task-ii.s} \label{part2code}
+
+\end{document}
