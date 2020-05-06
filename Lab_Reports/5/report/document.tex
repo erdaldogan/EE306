@@ -1,0 +1,38 @@
+\documentclass[titlepage]{article}
+
+\usepackage[tc]{titlepic}
+\usepackage{graphicx}
+\usepackage[top=25mm, bottom=25mm, left=27mm, right=27mm]{geometry}
+\usepackage{listings}
+\usepackage{lstlangarm}
+\usepackage{hyperref}
+
+
+
+
+\date{}
+\author{Erdal Sidal Dogan\\ \#041702023}
+\title{\includegraphics[width=0.6\textwidth]{../../logo_en_color.png}\\ 
+\vspace{5em}
+EE306 - Microprocessors\\
+\vspace{2em}
+\textbf{Laboratory Exercise 5 \linebreak Timer
+}\\
+\vspace{1.5em}
+\today}
+
+\begin{document}
+	\maketitle
+	\section{Task1}
+	In this task a LED had been switched on/off with .25 second intervals, which was accurately measured using \textit{A9 Private Timer}.
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code of Task-I]{../code/task1.s} 
+	\section{Task2}
+
+	\href{https://drive.google.com/file/d/1ZV85GaJMzvtzZx00Zmshr5DKWMjX639F/view?usp=sharing}{Click here for video explanation of Task 2} \\
+
+	This task is the implementation of a clock using 7-segment displays. \textit{A9 Private Timer} is used for accurate timing. The clock counts up to 59.99 seconds then resets. Since the each digit between 0-9 has a unique representation in 7-segment display, these representations are being held in memory location, which the \texttt{SEQUENCE} points the address of.
+
+	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, caption= Assembly code of Task-II]{../code/task2.s}
+	
+
+\end{document}
