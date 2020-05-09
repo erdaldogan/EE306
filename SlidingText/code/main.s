@@ -17,7 +17,6 @@ _start:
 	B PRINT_STRING
     	
 PRINT_STRING:
-	BL DELAY
 	LDRB R4, [R2, R3] // ascii code of the character
 	CMP R4, #0 // reached to the end of the string
 	MOVEQ R3, #0 // start from the beginning of the string
@@ -31,6 +30,7 @@ PRINT_STRING:
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
 	LDREQ R0, =0xFF200023 // leftmost of the 7-segments
 	SUBEQ R3, R3, #2
+	BLEQ DELAY
 	BEQ PRINT_STRING
 	ADD R3, R3, #1 /* increase the string char index to read the next char */
 	B PRINT_STRING
@@ -44,7 +44,7 @@ DELAY:
     BX LR
 	
 END: B END
-INPUT: .asciz "ABCDEF" //.asciz appends a zero at the end of the string as an finish indicator
+INPUT: .asciz "ERDAL SIDAL DOGAN" //.asciz appends a zero at the end of the string as an finish indicator
 ALPHABET: .byte 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x62, 0x6A, 0x64, 0x6E, 0x5B
 // 1 A = 0x77
 // 2 B = 0x7C
@@ -74,7 +74,10 @@ ALPHABET: .byte 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75
 // 26 Z = 0x5B
 .end
 
-
-
+/* TODO
+* Fix the space character printing 8
+* Use all of the 7-segments
+* Fix the circular loop problem
+*/
 
 
