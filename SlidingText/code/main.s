@@ -9,22 +9,30 @@ _start:
     /* AT THIS POINT WE CAN USE R1 & R2 REGISTERS AS WE WISH */
     /* DON'T FORGET R11 & R12 ARE RESERVED FOR TIMER OPERATION */
     
-    LDR R0, =0xFF200024 // 7-segment adress
+    LDR R0, =0xFF200023 // 7-segment adress
     LDR R1, =ALPHABET // address of the character set
     LDR R2, =INPUT // user input
-	MOV R3, #0 //count
+	MOV R3, #0 // string character index
+	LDR R10, =0xFF20001F
 	B PRINT_STRING
     	
 PRINT_STRING:
+	BL DELAY
 	LDRB R4, [R2, R3] // ascii code of the character
-	CMP R4, #00
-	BEQ END
+	CMP R4, #0 // reached to the end of the string
+	MOVEQ R3, #0 // start from the beginning of the string
+	BEQ PRINT_STRING
 	SUB R4, R4, #65 // location of that character in the representation array
 	LDRB R4, [R1, R4] // retrieve the character representation itself
 	STRB R4, [R0] // write on to the 7-segment
-	SUB R0, R0, #0x01
-	ADD R3, R3, #1
-	BL DELAY
+	SUB R0, R0, #1 /* R0 is the leftmost 7-segment
+	at each iteration, print the character to the left of the
+	previous char */
+	CMP R0, R10 // out of the available 7-segment adress. (too right)
+	LDREQ R0, =0xFF200023 // leftmost of the 7-segments
+	SUBEQ R3, R3, #2
+	BEQ PRINT_STRING
+	ADD R3, R3, #1 /* increase the string char index to read the next char */
 	B PRINT_STRING
 	
   
@@ -65,5 +73,8 @@ ALPHABET: .byte 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75
 // 25 Y = 0x6E
 // 26 Z = 0x5B
 .end
+
+
+
 
 
