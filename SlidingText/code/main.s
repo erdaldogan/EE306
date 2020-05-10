@@ -18,24 +18,32 @@ _start:
     	
 PRINT_STRING:
 	LDRB R4, [R2, R3] // ascii code of the character
-	CMP R4, #0 // reached to the end of the string
+	CMP R4, #0x00 // reached to the end of the string
 	MOVEQ R3, #0 // start from the beginning of the string
 	BEQ PRINT_STRING
-	SUB R4, R4, #65 // location of that character in the representation array
+	CMP R4, #32 // 32 is ascii code of the space char
+	SUBEQ R4, R4, #32
+	SUBNE R4, R4, #64 // location of that character in the representation array
 	LDRB R4, [R1, R4] // retrieve the character representation itself
-	STRB R4, [R0] // write on to the 7-segment
+  	STRB R4, [R0] // write on to the 7-segment
+	BL UPDATE_LOCATION
+	B PRINT_STRING
+
+	
+UPDATE_LOCATION:
 	SUB R0, R0, #1 /* R0 is the leftmost 7-segment
 	at each iteration, print the character to the left of the
 	previous char */
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
-	LDREQ R0, =0xFF200023 // leftmost of the 7-segments
-	SUBEQ R3, R3, #2
-	BLEQ DELAY
-	BEQ PRINT_STRING
-	ADD R3, R3, #1 /* increase the string char index to read the next char */
-	B PRINT_STRING
+	ADDNE R3, R3, #1 /* increase the string char index to read the next char */
+	BXNE LR
+	LDR R0, =0xFF200023 // leftmost of the 7-segments
+	SUB R3, R3, #2
+	PUSH {LR}
+	BL DELAY
+	POP {PC}
 	
-  
+	
 DELAY:
     LDR R12, [R11, #0xC]
     CMP R12, #1
@@ -44,8 +52,8 @@ DELAY:
     BX LR
 	
 END: B END
-INPUT: .asciz "ERDAL SIDAL DOGAN" //.asciz appends a zero at the end of the string as an finish indicator
-ALPHABET: .byte 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x62, 0x6A, 0x64, 0x6E, 0x5B
+INPUT: .asciz "AB CD EF GH I" //.asciz appends a zero at the end of the string as an finish indicator
+ALPHABET: .byte 0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x62, 0x6A, 0x64, 0x6E, 0x5B
 // 1 A = 0x77
 // 2 B = 0x7C
 // 3 C = 0x39
@@ -75,9 +83,10 @@ ALPHABET: .byte 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75
 .end
 
 /* TODO
-* Fix the space character printing 8
++ Fix the space character printing 8
 * Use all of the 7-segments
 * Fix the circular loop problem
 */
+
 
 
