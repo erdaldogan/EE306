@@ -12,33 +12,38 @@ _start:
     LDR R0, =0xFF200023 // 7-segment adress
     LDR R1, =ALPHABET // address of the character set
     LDR R2, =INPUT // user input
-	MOV R3, #0 // string character index
-	LDR R10, =0xFF20001F
+	MOV R3, #0 // string character iterator index
+	LDR R10, =0xFF20001F // non-entry zone for display addresses.
 	B PRINT_STRING
     	
 PRINT_STRING:
-	LDRB R4, [R2, R3] // ascii code of the character
+	LDRB R4, [R2, R3] // load ascii code of the character
 	CMP R4, #0x00 // reached to the end of the string
 	MOVEQ R3, #0 // start from the beginning of the string
 	BEQ PRINT_STRING
 	CMP R4, #32 // 32 is ascii code of the space char
-	SUBEQ R4, R4, #32
+	SUBEQ R4, R4, #32 // 0th location of array contains space char
 	SUBNE R4, R4, #64 // location of that character in the representation array
-	LDRB R4, [R1, R4] // retrieve the character representation itself
+	/* ascii(A) = 65 and goes sequentially, when we subtract
+	64 from the ascii code, we get the index of the char
+	representation in the array */
+	LDRB R4, [R1, R4] // retrieve the character representation 
   	STRB R4, [R0] // write on to the 7-segment
 	BL UPDATE_LOCATION
 	B PRINT_STRING
 
 	
 UPDATE_LOCATION:
-	SUB R0, R0, #1 /* R0 is the leftmost 7-segment
+	SUB R0, R0, #1 /* R0 is the leftmost 7-segment.
 	at each iteration, print the character to the left of the
 	previous char */
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
 	ADDNE R3, R3, #1 /* increase the string char index to read the next char */
 	BXNE LR
-	LDR R0, =0xFF200023 // leftmost of the 7-segments
+	LDR R0, =0xFF200023 // address of theleftmost of the 7-segments
 	SUB R3, R3, #2
+	CMP R3, #0
+	MOVLT R3, #0
 	PUSH {LR}
 	BL DELAY
 	POP {PC}
@@ -51,8 +56,9 @@ DELAY:
     STR R12, [R11, #0xC] // reset status flag.
     BX LR
 	
+
 END: B END
-INPUT: .asciz "AB CD EF GH I" //.asciz appends a zero at the end of the string as an finish indicator
+INPUT: .asciz "ABCDEFGHI" //.asciz appends a zero at the end of the string as an finish indicator
 ALPHABET: .byte 0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x62, 0x6A, 0x64, 0x6E, 0x5B
 // 1 A = 0x77
 // 2 B = 0x7C
@@ -87,6 +93,7 @@ ALPHABET: .byte 0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E
 * Use all of the 7-segments
 * Fix the circular loop problem
 */
+
 
 
 
