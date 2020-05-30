@@ -1,5 +1,6 @@
 .global _start
 _start:
+	LDR R9, =0xFF200050 // push button address
     LDR R11, =0xFFFEC600 //timer adress
     LDR R1, =200000000 // 200M
     STR R1, [R11] //set load register of the timer
@@ -31,6 +32,13 @@ PRINT_STRING:
 	representation in the array */
 	LDRB R4, [R1, R4] // retrieve the character representation 
   	STRB R4, [R0] // write on to the 7-segment
+	LDR R8, [R9]
+	CMP R8, #0
+	BLEQ NORMAL_SPEED
+	CMP R8, #2
+	BLEQ INCREASE_SPEED
+	CMP R8, #4
+	BLEQ DECREASE_SPEED
 	BL UPDATE_LOCATION
 	B PRINT_STRING
 
@@ -57,7 +65,21 @@ DELAY:
     STR R12, [R11, #0xC] // reset status flag.
     BX LR
 	
-
+NORMAL_SPEED:
+	LDR R12, =400000000 // 400M
+    STR R12, [R11]
+	BX LR
+	
+INCREASE_SPEED:
+	LDR R12, =800000000 // 400M
+    STR R12, [R11]
+	BX LR
+	
+DECREASE_SPEED:
+	LDR R12, =50000000 // 400M
+    STR R12, [R11]
+	BX LR
+	
 END: B END
 INPUT: .asciz "ABCDEFGHI" //.asciz appends a zero at the end of the string as an finish indicator
 ALPHABET: .byte 0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x76, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x62, 0x6A, 0x64, 0x6E, 0x5B
