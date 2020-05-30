@@ -6,7 +6,8 @@ _start:
     STR R12, [R11] //set load register of the timer
     MOV R2, #0b011 //control configuration
     STR R2, [R11, #8] //set config bits
-	
+	MOV R7, #0 //current input
+
     /* AT THIS POINT WE CAN USE R1 & R2 REGISTERS AS WE WISH */
     /* DON'T FORGET R11 & R12 ARE RESERVED FOR TIMER OPERATION */
     
@@ -19,6 +20,7 @@ _start:
 	B MAIN
 
 MAIN:
+	BL SET_WORD
 	BL CHECK_PAUSE
 	BL SET_SPEED
 	BL PRINT_STRING
@@ -57,6 +59,37 @@ SET_SPEED:
 		STR R12, [R11]
 		POP {R6, R7, R8}
 		BX LR
+
+SET_WORD:
+	PUSH {R0}
+	set_word_loop:
+		LDR R0, SWITCH_BASE
+		LDR R0, [R0]
+		CMP R0, #0
+		BEQ set_word_loop
+		CMP R0, R7 // if not changed
+		POP {R0} // restore r0
+		BXEQ LR // return to main loop
+		PUSH {R0}
+		LDR R0, SWITCH_BASE
+		LDR R0, [R0]
+		CMP R0, #1
+		LDREQ R2, =INPUT0
+		MOVEQ R7, #1
+		CMP R0, #2
+		LDREQ R2, =INPUT1
+		MOVEQ R7, #2
+		CMP R0, #4
+		LDREQ R2, =INPUT2
+		MOVEQ R7, #4
+		CMP R0, #8
+		LDREQ R2, =INPUT3
+		MOVEQ R7, #8
+		MOV R3, #0 // string character iterator index
+		MOV R5, #0 // length
+		POP {R0}
+		BX LR
+
 
 PRINT_STRING:
 	PUSH {LR} // save state of link register 
@@ -117,6 +150,7 @@ END: B END
 DISPLAY_BASE: .word 0xff200023 //display base address
 TIMER_BASE: .word 0xfffec600 //timer base address
 BUTTON_BASE: .word 0xff200050 //buttons base address
+SWITCH_BASE: .word 0xff200040 //switches base address
 INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz" //.asciz appends a zero at the end of the string as an finish indicator
 INPUT1: .asciz "1234567890" //.asciz appends a zero at the end of the string as an finish indicator
 INPUT2: .asciz "ABCDEFGHIJKLMNOPQRSTUVXYZ" //.asciz appends a zero at the end of the string as an finish indicator
