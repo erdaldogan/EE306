@@ -16,7 +16,6 @@ _start:
     LDR R2, =INPUT0 // user input
 	MOV R3, #0 // string character iterator index
 	MOV R5, #0 // length 
-	LDR R10, =0xFF20001F // non-entry zone for display addresses.
 	B MAIN
 
 MAIN:
@@ -125,11 +124,15 @@ UPDATE_LOCATION:
 	SUB R0, R0, #1 /* R0 is the leftmost 7-segment.
 	at each iteration, print the character to the left of the
 	previous char */
+	LDR R10, =0xFF20002F // non-entry zone for display addresses.
+	CMP R0, R10
+	LDREQ R0, =0xFF200023
+	LDR R10, =0xFF20001F // non-entry zone for display addresses.
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
 	ADDNE R3, R3, #1 /* increase the string char index to read the next char */
 	BXNE LR
-	LDR R0, =0xFF200023 // address of the leftmost of the 7-segments
-	SUB R3, R3, #2
+	LDR R0, =0xFF200033 // address of the leftmost of the 7-segments
+	SUB R3, R3, #6
 	CMP R3, #0
 	ADDLT R3, R3, R5
 	PUSH {LR}
@@ -147,7 +150,7 @@ DELAY:
 
 END: B END
 
-DISPLAY_BASE: .word 0xff200023 //display base address
+DISPLAY_BASE: .word 0xff200033 //display base address
 TIMER_BASE: .word 0xfffec600 //timer base address
 BUTTON_BASE: .word 0xff200050 //buttons base address
 SWITCH_BASE: .word 0xff200040 //switches base address
