@@ -1,6 +1,6 @@
 .global _start
 _start:
-	LDR R9, BUTTON_BASE
+	LDR R9, BUTTON_BASE // push buttons address
     LDR R11, TIMER_BASE //timer adress
     LDR R12, =200000000 // 200M
     STR R12, [R11] //set load register of the timer
@@ -19,10 +19,10 @@ _start:
 	B MAIN
 
 MAIN:
-	BL SET_WORD
-	BL CHECK_PAUSE
-	BL SET_SPEED
-	BL PRINT_STRING
+	BL SET_WORD // setting the word according to the switches
+	BL CHECK_PAUSE // checking pause state from push button 0
+	BL SET_SPEED // setting the speed of words according to push button 1 and 2
+	BL PRINT_STRING // updating 7 segments
 	B MAIN
 
 CHECK_PAUSE:
@@ -35,58 +35,58 @@ CHECK_PAUSE:
 		BX LR
 		
 SET_SPEED:
-	PUSH {R6, R7, R8}
-	LDR R6, [R9]
-	CMP R6, #0b010
-	BEQ INCREASE_SPEED
-	CMP R6, #0b100
-	BEQ DECREASE_SPEED
+	PUSH {R6, R7, R8} // save state of registers
+	LDR R6, [R9] // load buttons state
+	CMP R6, #0b100 // check if button 2 is pressed
+	BEQ INCREASE_SPEED // if yes branch to increase speed
+	CMP R6, #0b010 // check if button 1 is pressed
+	BEQ DECREASE_SPEED // if yes branch to decrease speed
 	
 	NORMALIZE_SPEED:
-		LDR R12, =200000000
-		STR R12, [R11]
-		POP {R6, R7, R8}
-		BX LR
+		LDR R12, =200000000 // load 200m to normalize speed
+		STR R12, [R11] // update load register of the timer
+		POP {R6, R7, R8} //restore the registers
+		BX LR // return to main loop
 	
 	INCREASE_SPEED:
-		LDR R12, =800000000
-		STR R12, [R11]
-		POP {R6, R7, R8}
-		BX LR
+		LDR R12, =50000000 // load 50m to increase the speed
+		STR R12, [R11] // update load register of the timer
+		POP {R6, R7, R8} // restore the registers
+		BX LR // return to main loop
 	DECREASE_SPEED:
-		LDR R12, =50000000
-		STR R12, [R11]
-		POP {R6, R7, R8}
-		BX LR
+		LDR R12, =800000000 // load 800m to decrease the speed
+		STR R12, [R11] // update load register of the timer
+		POP {R6, R7, R8} // restore the registers
+		BX LR // return to main loop
 
 SET_WORD:
-	PUSH {R0}
+	PUSH {R0} // save register state
 	set_word_loop:
-		LDR R0, SWITCH_BASE
-		LDR R0, [R0]
-		CMP R0, #0
-		BEQ set_word_loop
+		LDR R0, SWITCH_BASE // load base address of switches
+		LDR R0, [R0] // load switches' status
+		CMP R0, #0 // check if any of the switches are on
+		BEQ set_word_loop // if not continue until one of them is pressed
 		CMP R0, R7 // if not changed
 		POP {R0} // restore r0
 		BXEQ LR // return to main loop
-		PUSH {R0}
-		LDR R0, SWITCH_BASE
-		LDR R0, [R0]
-		CMP R0, #1
-		LDREQ R2, =INPUT0
-		MOVEQ R7, #1
-		CMP R0, #2
-		LDREQ R2, =INPUT1
-		MOVEQ R7, #2
-		CMP R0, #4
-		LDREQ R2, =INPUT2
-		MOVEQ R7, #4
-		CMP R0, #8
-		LDREQ R2, =INPUT3
-		MOVEQ R7, #8
-		MOV R3, #0 // string character iterator index
-		MOV R5, #0 // length
-		POP {R0}
+		PUSH {R0} // save r0 again
+		LDR R0, SWITCH_BASE // load base address of switches
+		LDR R0, [R0] // load switches' status
+		CMP R0, #1 // check if switch 0 is on
+		LDREQ R2, =INPUT0 // update input
+		MOVEQ R7, #1 // update flag
+		CMP R0, #2 // check if switch 1 is on
+		LDREQ R2, =INPUT1 // update input
+		MOVEQ R7, #2 // update flag
+		CMP R0, #4 // check if switch 2 is on
+		LDREQ R2, =INPUT2 // update input
+		MOVEQ R7, #4 // update flag
+		CMP R0, #8 // check if switch 3 is on
+		LDREQ R2, =INPUT3 // update input
+		MOVEQ R7, #8 // update flag
+		MOV R3, #0 // reset string character iterator index
+		MOV R5, #0 // reset length
+		POP {R0} // restore state of register
 		BX LR
 
 
@@ -110,15 +110,17 @@ PRINT_STRING:
 		BL UPDATE_LOCATION
 		POP {LR} // restore link register
 		BX LR // return to main
+
+//this subroutine finds the location of the input char on ALPHABET
 FIND_LOC:
-	CMP R4, #65
-	SUBLT R4, R4, #47
-	BXLT LR
-	CMP R4, #97
-	SUBLT R4, R4, #54
-	BXLT LR
-	SUB R4, R4, #86
-	BX LR
+	CMP R4, #65 // check if it is upper case "A"
+	SUBLT R4, R4, #47 // for numbers
+	BXLT LR // return to PRINT_STR
+	CMP R4, #97 // check if it is lower case "a"
+	SUBLT R4, R4, #54 // for upper case letters
+	BXLT LR // return to PRINT_STR
+	SUB R4, R4, #86 // for lower case letters
+	BX LR // return to PRINT_STR
 	
 UPDATE_LOCATION:
 	SUB R0, R0, #1 /* R0 is the leftmost 7-segment.
@@ -126,7 +128,7 @@ UPDATE_LOCATION:
 	previous char */
 	LDR R10, =0xFF20002F // non-entry zone for display addresses.
 	CMP R0, R10
-	LDREQ R0, =0xFF200023
+	LDREQ R0, =0xFF200023 
 	LDR R10, =0xFF20001F // non-entry zone for display addresses.
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
 	ADDNE R3, R3, #1 /* increase the string char index to read the next char */
@@ -152,13 +154,12 @@ END: B END
 
 DISPLAY_BASE: .word 0xff200033 //display base address
 TIMER_BASE: .word 0xfffec600 //timer base address
-BUTTON_BASE: .word 0xff200050 //buttons base address
+BUTTON_BASE: .word 0xff200050 //push buttons base address
 SWITCH_BASE: .word 0xff200040 //switches base address
 INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz" //.asciz appends a zero at the end of the string as an finish indicator
 INPUT1: .asciz "1234567890" //.asciz appends a zero at the end of the string as an finish indicator
 INPUT2: .asciz "ABCDEFGHIJKLMNOPQRSTUVXYZ" //.asciz appends a zero at the end of the string as an finish indicator
 INPUT3: .asciz "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVXYZ" //.asciz appends a zero at the end of the string as an finish indicator
-
 ALPHABET: .byte 0x00, 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x74, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x2A, 0x76, 0x6E, 0x5B
 // 1 A = 0x77
 // 2 B = 0x7C
