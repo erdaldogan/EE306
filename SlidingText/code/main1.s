@@ -26,12 +26,12 @@ MAIN:
 	B MAIN
 
 CHECK_PAUSE:
-	PUSH {R6, R7, R8}
+	PUSH {R7}
 	PAUSE:
-		LDR R7, [R6]
+		LDR R7, [R9]
 		ANDS R7, R7, #0b001 // if push button 0 is pressed
 		BNE PAUSE
-		POP {R6, R7, R8}
+		POP {R7}
 		BX LR
 		
 SET_SPEED:
@@ -127,27 +127,27 @@ UPDATE_LOCATION:
 	at each iteration, print the character to the left of the
 	previous char */
 	LDR R10, =0xFF20002F // non-entry zone for display addresses.
-	CMP R0, R10
-	LDREQ R0, =0xFF200023 
+	CMP R0, R10 // check if in non-entry zone
+	LDREQ R0, =0xFF200023 // if yes reset
 	LDR R10, =0xFF20001F // non-entry zone for display addresses.
 	CMP R0, R10 // out of the available 7-segment adress. (too right)
 	ADDNE R3, R3, #1 /* increase the string char index to read the next char */
-	BXNE LR
+	BXNE LR // return to PRINT_STR
 	LDR R0, =0xFF200033 // address of the leftmost of the 7-segments
 	SUB R3, R3, #6
 	CMP R3, #0
 	ADDLT R3, R3, R5
-	PUSH {LR}
-	BL DELAY
-	POP {LR}
-	BX LR
+	PUSH {LR} // save link register
+	BL DELAY // do delay
+	POP {LR} // restore link register
+	BX LR // return to PRINT_STR
 	
 DELAY:
-    LDR R8, [R11, #0xC]
-    CMP R8, #1
-    BNE DELAY
+    LDR R8, [R11, #0xC] // load timer state
+    CMP R8, #1 // check the interrupt
+    BNE DELAY // branch until interrupt
     STR R8, [R11, #0xC] // reset status flag.
-    BX LR
+    BX LR // return to UPDATE_LOCATION
 	
 
 END: B END
@@ -156,40 +156,45 @@ DISPLAY_BASE: .word 0xff200033 //display base address
 TIMER_BASE: .word 0xfffec600 //timer base address
 BUTTON_BASE: .word 0xff200050 //push buttons base address
 SWITCH_BASE: .word 0xff200040 //switches base address
-INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz" //.asciz appends a zero at the end of the string as an finish indicator
-INPUT1: .asciz "1234567890" //.asciz appends a zero at the end of the string as an finish indicator
-INPUT2: .asciz "ABCDEFGHIJKLMNOPQRSTUVXYZ" //.asciz appends a zero at the end of the string as an finish indicator
-INPUT3: .asciz "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVXYZ" //.asciz appends a zero at the end of the string as an finish indicator
+INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVXYZ " //.asciz appends a zero at the end of the string as an finish indicator
+INPUT1: .asciz "1234567890 " //.asciz appends a zero at the end of the string as an finish indicator
+INPUT2: .asciz "Mustafa Kemal Ataturk " //.asciz appends a zero at the end of the string as an finish indicator
+INPUT3: .asciz "MeF RoCkS EE306 MiCrOpRoCesSorS " //.asciz appends a zero at the end of the string as an finish indicator
 ALPHABET: .byte 0x00, 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x74, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x2A, 0x76, 0x6E, 0x5B
-// 1 A = 0x77
-// 2 B = 0x7C
-// 3 C = 0x39
-// 4 D = 0x5E
-// 5 E = 0x79
-// 6 F = 0x71
-// 7 G = 0x7D
-// 8 H = 0x76
-// 9 I = 0x06
-// 10 J = 0x0E
-// 11 K = 0x75
-// 12 L = 0x38
-// 13 M = 0x15
-// 14 N = 0x54
-// 15 O = 0x5C
-// 16 P = 0x73
-// 17 Q = 0x67
-// 18 R = 0x50
-// 19 S = 0x6D
-// 20 T = 0x78
-// 21 U = 0x3E
-// 22 W = 0x62
-// 23 V = 0x6A
-// 24 X = 0x64
-// 25 Y = 0x6E
-// 26 Z = 0x5B
+// 1 0 = 0x3F
+// 2 1 = 0x06
+// 3 2 = 0x5B
+// 4 3 = 0x4F
+// 5 4 = 0x66
+// 6 5 = 0x6D
+// 7 6 = 0x7D
+// 8 7 = 0x07
+// 9 8 = 0x7F
+// 10 9 = 0x6F
+// 11 A = 0x77
+// 12 B = 0x7C
+// 13 C = 0x39
+// 14 D = 0x5E
+// 15 E = 0x79
+// 16 F = 0x71
+// 17 G = 0x7D
+// 18 H = 0x74
+// 19 I = 0x06
+// 20 J = 0x0E
+// 21 K = 0x75
+// 22 L = 0x38
+// 23 M = 0x15
+// 24 N = 0x54
+// 25 O = 0x5C
+// 26 P = 0x73
+// 27 Q = 0x67
+// 28 R = 0x50
+// 29 S = 0x6D
+// 30 T = 0x78
+// 31 U = 0x3E
+// 32 W = 0x1C
+// 33 V = 0x2A
+// 34 X = 0x76
+// 35 Y = 0x6E
+// 36 Z = 0x5B
 .end
-
-/* TODO
-+ Fix the space character printing 8
-* Use all of the 7-segments
-*/
