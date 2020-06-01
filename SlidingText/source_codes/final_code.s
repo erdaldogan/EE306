@@ -6,14 +6,14 @@ _start:
     STR R12, [R11] //set load register of the timer
     MOV R2, #0b011 //control configuration
     STR R2, [R11, #8] //set config bits
-	MOV R7, #0 //current input
+	MOV R7, #0 //current input status flag
 
     /* AT THIS POINT WE CAN USE R1 & R2 REGISTERS AS WE WISH */
     /* DON'T FORGET R11 & R12 ARE RESERVED FOR TIMER OPERATION */
     
     LDR R0, DISPLAY_BASE // 7-segment adress
-    LDR R1, =ALPHABET // address of the character set
-    LDR R2, =INPUT0 // user input
+    LDR R1, =CHAR_SET // address of the character set
+    LDR R2, =INPUT0 // input register
 	MOV R3, #0 // string character iterator index
 	MOV R5, #0 // length 
 	B MAIN
@@ -26,16 +26,16 @@ MAIN:
 	B MAIN
 
 CHECK_PAUSE:
-	PUSH {R7}
+	PUSH {R7} // save state of r7
 	PAUSE:
-		LDR R7, [R9]
+		LDR R7, [R9] // load push buttons' state
 		ANDS R7, R7, #0b001 // if push button 0 is pressed
-		BNE PAUSE
-		POP {R7}
-		BX LR
+		BNE PAUSE // branch until not pressed
+		POP {R7} // restore state of r7
+		BX LR // return to main loop
 		
 SET_SPEED:
-	PUSH {R6, R7, R8} // save state of registers
+	PUSH { R6 } // save state of registers
 	LDR R6, [R9] // load buttons state
 	CMP R6, #0b100 // check if button 2 is pressed
 	BEQ INCREASE_SPEED // if yes branch to increase speed
@@ -45,18 +45,18 @@ SET_SPEED:
 	NORMALIZE_SPEED:
 		LDR R12, =200000000 // load 200m to normalize speed
 		STR R12, [R11] // update load register of the timer
-		POP {R6, R7, R8} //restore the registers
+		POP { R6 } //restore the register
 		BX LR // return to main loop
 	
 	INCREASE_SPEED:
 		LDR R12, =50000000 // load 50m to increase the speed
 		STR R12, [R11] // update load register of the timer
-		POP {R6, R7, R8} // restore the registers
+		POP { R6 } // restore the register
 		BX LR // return to main loop
 	DECREASE_SPEED:
 		LDR R12, =800000000 // load 800m to decrease the speed
 		STR R12, [R11] // update load register of the timer
-		POP {R6, R7, R8} // restore the registers
+		POP { R6 } // restore the register
 		BX LR // return to main loop
 
 SET_WORD:
@@ -111,7 +111,7 @@ PRINT_STRING:
 		POP {LR} // restore link register
 		BX LR // return to main
 
-//this subroutine finds the location of the input char on ALPHABET
+//this subroutine finds the location of the input char on CHAR_SET
 FIND_LOC:
 	CMP R4, #65 // check if it is upper case "A"
 	SUBLT R4, R4, #47 // for numbers
@@ -146,7 +146,7 @@ DELAY:
     LDR R8, [R11, #0xC] // load timer state
     CMP R8, #1 // check the interrupt
     BNE DELAY // branch until interrupt
-    STR R8, [R11, #0xC] // reset status flag.
+    STR R8, [R11, #0xC] // reset timer state
     BX LR // return to UPDATE_LOCATION
 	
 END: B END
@@ -160,7 +160,7 @@ INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVXYZ "
 INPUT1: .asciz "1234567890 "
 INPUT2: .asciz "Mustafa Kemal Ataturk "
 INPUT3: .asciz "MeF RoCkS EE306 MiCrOpRoCesSorS "
-ALPHABET: .byte 0x00, 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x74, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x2A, 0x76, 0x6E, 0x5B
+CHAR_SET: .byte 0x00, 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x74, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x2A, 0x76, 0x6E, 0x5B
 // 1 0 = 0x3F       11 A = 0x77     21 K = 0x75     31 U = 0x3E
 // 2 1 = 0x06       12 B = 0x7C     22 L = 0x38     32 W = 0x1C
 // 3 2 = 0x5B       13 C = 0x39     23 M = 0x15     33 V = 0x2A
