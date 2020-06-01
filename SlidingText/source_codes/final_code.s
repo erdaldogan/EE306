@@ -149,52 +149,27 @@ DELAY:
     STR R8, [R11, #0xC] // reset status flag.
     BX LR // return to UPDATE_LOCATION
 	
-
 END: B END
 
 DISPLAY_BASE: .word 0xff200033 //display base address
 TIMER_BASE: .word 0xfffec600 //timer base address
 BUTTON_BASE: .word 0xff200050 //push buttons base address
 SWITCH_BASE: .word 0xff200040 //switches base address
-INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVXYZ " //.asciz appends a zero at the end of the string as an finish indicator
-INPUT1: .asciz "1234567890 " //.asciz appends a zero at the end of the string as an finish indicator
-INPUT2: .asciz "Mustafa Kemal Ataturk " //.asciz appends a zero at the end of the string as an finish indicator
-INPUT3: .asciz "MeF RoCkS EE306 MiCrOpRoCesSorS " //.asciz appends a zero at the end of the string as an finish indicator
+//.asciz appends a zero at the end of the string as an finish indicator
+INPUT0: .asciz "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVXYZ "
+INPUT1: .asciz "1234567890 "
+INPUT2: .asciz "Mustafa Kemal Ataturk "
+INPUT3: .asciz "MeF RoCkS EE306 MiCrOpRoCesSorS "
 ALPHABET: .byte 0x00, 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x7D, 0x74, 0x06, 0x0E, 0x75, 0x38, 0x15, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x2A, 0x76, 0x6E, 0x5B
-// 1 0 = 0x3F
-// 2 1 = 0x06
-// 3 2 = 0x5B
-// 4 3 = 0x4F
-// 5 4 = 0x66
-// 6 5 = 0x6D
-// 7 6 = 0x7D
-// 8 7 = 0x07
-// 9 8 = 0x7F
-// 10 9 = 0x6F
-// 11 A = 0x77
-// 12 B = 0x7C
-// 13 C = 0x39
-// 14 D = 0x5E
-// 15 E = 0x79
-// 16 F = 0x71
-// 17 G = 0x7D
-// 18 H = 0x74
-// 19 I = 0x06
-// 20 J = 0x0E
-// 21 K = 0x75
-// 22 L = 0x38
-// 23 M = 0x15
-// 24 N = 0x54
-// 25 O = 0x5C
-// 26 P = 0x73
-// 27 Q = 0x67
-// 28 R = 0x50
-// 29 S = 0x6D
-// 30 T = 0x78
-// 31 U = 0x3E
-// 32 W = 0x1C
-// 33 V = 0x2A
-// 34 X = 0x76
-// 35 Y = 0x6E
-// 36 Z = 0x5B
+// 1 0 = 0x3F       11 A = 0x77     21 K = 0x75     31 U = 0x3E
+// 2 1 = 0x06       12 B = 0x7C     22 L = 0x38     32 W = 0x1C
+// 3 2 = 0x5B       13 C = 0x39     23 M = 0x15     33 V = 0x2A
+// 4 3 = 0x4F       14 D = 0x5E     24 N = 0x54     34 X = 0x76
+// 5 4 = 0x66       15 E = 0x79     25 O = 0x5C     35 Y = 0x6E
+// 6 5 = 0x6D       16 F = 0x71     26 P = 0x73     36 Z = 0x5B
+// 7 6 = 0x7D       17 G = 0x7D     27 Q = 0x67
+// 8 7 = 0x07       18 H = 0x74     28 R = 0x50
+// 9 8 = 0x7F       19 I = 0x06     29 S = 0x6D
+// 10 9 = 0x6F      20 J = 0x0E     30 T = 0x78
+
 .end
