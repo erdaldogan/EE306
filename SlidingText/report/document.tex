@@ -1,13 +1,13 @@
 \documentclass[titlepage]{article}
 \usepackage[tc]{titlepic}
 \usepackage{graphicx}
-\usepackage{amsmath}
 \usepackage[top=25mm, bottom=25mm, left=27mm, right=27mm]{geometry}
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{lstlangarm}
 \usepackage{tabu}
-\usepackage[outdir=./]{epstopdf}
+\usepackage{wrapfig}
+
 
 
 \date{}
@@ -56,33 +56,65 @@ June 8, 2020}
 	\end{figure}
 	\section{Source Code}
 	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, breaklines=true, showspaces=false, showstringspaces=false, caption=Source code of our sliding text project]{../source_codes/final_code.s} \label{source_code}
-	
+	\newpage
 	\section{Flowcharts}
+	\subsection{MAIN}
+	After the initialization, the program starts executing the \textit{Main} subroutine. It consists of chaining other subroutines sequentially such as  \textit{SET\_WORD}, \textit{CHECK\_PAUSE}, \textit{SET\_SPEED}, \textit{PRINT\_STRING}.
+	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.27]{../images/main.pdf}
+		\includegraphics[scale=.3]{../images/main.pdf}
 		\caption{Flowchart of Main Loop}
 	\end{figure}
+ 	\newpage
+	\subsection{SET\_WORD}
+	The program supports multiple words. Selection is being made by the 'Switch' input. The subroutine \textit{SET\_WORD} is responsible for choosing the correct word according to the input.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.3]{../images/set_word.pdf}
+		\includegraphics[scale=.25]{../images/set_word.pdf}
 		\caption{Flowchart of Set Word Subroutine}
 	\end{figure}
+	\newpage
+	\subsection{SET\_SPEED \& CHECK\_PAUSE}
+	As the names suggests, \textit{SET\_SPEED} and \textit{CHECK\_PAUSE} subroutines are pausing the slider and sets its speed. Both of these functions are triggered by certain combinations of push buttons. They check the latest push button configuration pause or increase/decrease the speed accordingly. There are 3 different predefined levels of speed;
+	\begin{itemize}
+		\item Normal: 1 sec
+		\item Fast: .25 sec
+		\item Slow: 4 sec
+	\end{itemize}
 	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=.45]{../images/check_pause.pdf}
-		\caption{Flowchart of Check Pause Subroutine}
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[scale=.3]{../images/check_pause.pdf}
+			\caption{Flowchart of Check Pause Subroutine}
+		\end{minipage}
+		\begin{minipage}{0.7\linewidth}
+			\centering
+			\includegraphics[scale=.3]{../images/set_speed.pdf}
+			\caption{Flowchart of Set Speed Subroutine}
+		\end{minipage}
 	\end{figure}
-	\begin{figure}[h]
-		\centering
-		\includegraphics[scale=.35]{../images/set_speed.pdf}
-		\caption{Flowchart of Set Speed Subroutine}
-	\end{figure}
+	\newpage
+	\subsection{PRINT\_STRING \& DELAY \& FIND\_LOC}
+	\subsubsection{DELAY}
+	The A9 Private Timer is being used for delays. This subroutine checks the timer configuration continuously until it finishes its countdown, after it finished this subroutine resets it and start over again when called next time.
+	\subsubsection{PRINT\_STRING}
+	This subroutine determines which letter to print relying on the input and which 7segment to print it.
+	\subsubsection{FIND\_LOC}
+	The representation of possible inputs, which are capital and lowercase letters along with numbers, are stored sequentially in the memory. This subroutine is used for locating the correct 7-segment representation in the memory.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=.15]{../images/print_string.pdf}
-		\caption{Flowchart of Main Loop}
+		\caption{Flowchart of Print String Method}
 	\end{figure}
+	\subsubsection{UPDATE\_LOCATION}
+	\begin{wrapfigure}{r}{0.4\textwidth}
+		\centering
+		\includegraphics[scale=.2]{../images/update_location.pdf}
+		\caption{Birds}
+	\end{wrapfigure}
+	This subroutine determines which 7-segment to write next character. Given that there are jumps between memory locations of 7-segments and circular loop, it has been decided that its best to handle these operations in a different subroutine. First we set it to be the 7-segment that is right next to the previous one. Then we check if has exceeded any limits, if it did, reset the position accordingly.
+
 
 
 \end{document}
