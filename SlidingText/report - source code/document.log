@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.23)  5 JUN 2020 20:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.23)  5 JUN 2020 21:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -285,107 +285,29 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <../imag
-es/logo_en_color.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
-
- []
-
-<../images/supported_chars.pdf, id=12, 3173.8575pt x 1730.465pt>
-File: ../images/supported_chars.pdf Graphic file (type pdf)
-<use ../images/supported_chars.pdf>
-Package pdftex.def Info: ../images/supported_chars.pdf  used on input line 34.
-(pdftex.def)             Requested size: 317.40434pt x 173.05664pt.
-<../images/fig1.png, id=13, 648.92438pt x 54.2025pt>
-File: ../images/fig1.png Graphic file (type png)
-<use ../images/fig1.png>
-Package pdftex.def Info: ../images/fig1.png  used on input line 41.
-(pdftex.def)             Requested size: 292.01328pt x 24.39088pt.
-<../images/fig2.png, id=14, 640.89438pt x 53.19875pt>
-File: ../images/fig2.png Graphic file (type png)
-<use ../images/fig2.png>
-Package pdftex.def Info: ../images/fig2.png  used on input line 47.
-(pdftex.def)             Requested size: 288.3998pt x 23.93921pt.
-<../images/fig3.png, id=15, 633.86812pt x 135.50626pt>
-File: ../images/fig3.png Graphic file (type png)
-<use ../images/fig3.png>
-Package pdftex.def Info: ../images/fig3.png  used on input line 53.
-(pdftex.def)             Requested size: 285.23802pt x 60.97723pt.
-[1 <../images/supported_chars.pdf> <../images/fig1.png> <../images/fig2.png> <.
-./images/fig3.png>] (../source_codes/final_code.s
+es/logo_en_color.png>] (../source_codes/final_code.s
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
- [2] [3] [4]) [5]
-<../images/main.pdf, id=47, 645.41125pt x 1143.27126pt>
-File: ../images/main.pdf Graphic file (type pdf)
-<use ../images/main.pdf>
-Package pdftex.def Info: ../images/main.pdf  used on input line 66.
-(pdftex.def)             Requested size: 193.62486pt x 342.98402pt.
- [6 <../images/main.pdf>]
-<../images/set_word.pdf, id=64, 912.40875pt x 1887.05pt>
-File: ../images/set_word.pdf Graphic file (type pdf)
-<use ../images/set_word.pdf>
-Package pdftex.def Info: ../images/set_word.pdf  used on input line 74.
-(pdftex.def)             Requested size: 228.10162pt x 471.76135pt.
- [7 <../images/set_word.pdf>]
-<../images/check_pause.pdf, id=79, 632.3625pt x 877.2775pt>
-File: ../images/check_pause.pdf Graphic file (type pdf)
-<use ../images/check_pause.pdf>
-Package pdftex.def Info: ../images/check_pause.pdf  used on input line 88.
-(pdftex.def)             Requested size: 189.7102pt x 263.18527pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 90.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 90.
-<../images/set_speed.pdf, id=80, 875.27pt x 1458.44875pt>
-File: ../images/set_speed.pdf Graphic file (type pdf)
-<use ../images/set_speed.pdf>
-Package pdftex.def Info: ../images/set_speed.pdf  used on input line 93.
-(pdftex.def)             Requested size: 262.58302pt x 437.53801pt.
-
-Overfull \hbox (71.31691pt too wide) in paragraph at lines 86--96
-[]$[]$ $[]$ 
- []
-
-[8 <../images/check_pause.pdf> <../images/set_speed.pdf>]
-<../images/print_string.pdf, id=107, 2246.3925pt x 973.6375pt>
-File: ../images/print_string.pdf Graphic file (type pdf)
-<use ../images/print_string.pdf>
-Package pdftex.def Info: ../images/print_string.pdf  used on input line 107.
-(pdftex.def)             Requested size: 336.94434pt x 146.03932pt.
-<../images/update_location.pdf, id=108, 649.42625pt x 885.3075pt>
-File: ../images/update_location.pdf Graphic file (type pdf)
-<use ../images/update_location.pdf>
-Package pdftex.def Info: ../images/update_location.pdf  used on input line 113.
-
-(pdftex.def)             Requested size: 129.88295pt x 177.05835pt.
- [9 <../images/print_string.pdf> <../images/update_location.pdf>] (./document.a
-ux) ) 
+ [1] [2] [3]) [4]
+(./document.aux) ) 
 Here is how much of TeX's memory you used:
- 9442 strings out of 480608
- 128175 string characters out of 5903630
- 876743 words of memory out of 5000000
- 25295 multiletter control sequences out of 15000+600000
- 537749 words of font info for 42 fonts, out of 8000000 for 9000
+ 9364 strings out of 480608
+ 126292 string characters out of 5903630
+ 874804 words of memory out of 5000000
+ 25230 multiletter control sequences out of 15000+600000
+ 536453 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,43p,764b,5358s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.
-enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.p
-fb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pf
-b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
-/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on document.pdf (10 pages, 567925 bytes).
+ 41i,6n,43p,512b,5358s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr17.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mtt10.pfb>
+Output written on document.pdf (5 pages, 125281 bytes).
 PDF statistics:
- 164 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
+ 43 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
