@@ -59,7 +59,7 @@ June 8, 2020}
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.3]{../images/main.pdf}
+		\includegraphics[scale=.4]{../images/main.pdf}
 		\caption{Flowchart of Main Loop}
 	\end{figure}
  	\newpage
@@ -67,7 +67,7 @@ June 8, 2020}
 	The program supports multiple words. Selection is being made by the 'Switch' input. The subroutine \textit{SET\_WORD} is responsible for choosing the correct word according to the input.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.25]{../images/set_word.pdf}
+		\includegraphics[scale=.23]{../images/set_word.pdf}
 		\caption{Flowchart of Set Word Subroutine}
 	\end{figure}
 	\newpage
@@ -100,13 +100,15 @@ June 8, 2020}
 	The representation of possible inputs, which are capital and lowercase letters along with numbers, are stored sequentially in the memory. This subroutine is used for locating the correct 7-segment representation in the memory.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=.15]{../images/print_string.pdf}
+		\includegraphics[scale=.2]{../images/print_string.pdf}
 		\caption{Flowchart of Print String Subroutine}
 	\end{figure}
 	\subsubsection{UPDATE\_LOCATION}
+	
 	\begin{wrapfigure}{r}{0.4\textwidth}
+		\vspace*{-4em}
 		\centering
-		\includegraphics[scale=.2]{../images/update_location.pdf}
+		\includegraphics[scale=.25]{../images/update_location.pdf}
 		\caption{Flowchart of Update Location Subroutine}
 	\end{wrapfigure}
 	This subroutine determines which 7-segment to write next character. Given that there are jumps between memory locations of 7-segments and circular loop, it has been decided that its best to handle these operations in a different subroutine. First we set it to be the 7-segment that is right next to the previous one. Then we check if has exceeded any limits, if it did, reset the position accordingly.
