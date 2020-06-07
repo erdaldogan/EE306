@@ -25,8 +25,7 @@ June 8, 2020}
 \begin{document}
 	\maketitle
 	\section{Project Description}
-	2-3 cümlelik abstract/description (0-1): açıklayıcı, net olmalı.
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at lectus est. Etiam pellentesque, dui eget tempor suscipit, turpis dui pharetra sapien, vel molestie enim felis ac est. Aliquam erat volutpat. Duis eget dictum lacus, nec luctus magna. Sed et cursus erat. Vivamus lobortis sollicitudin fringilla. In tincidunt mi arcu, quis suscipit metus hendrerit vitae. Sed ut libero sit amet orci pretium fermentum sit amet eu augue. Vivamus lobortis ante ut nunc porta posuere. Quisque vel leo a dui ultrices imperdiet.\\
+	In this project, the text has been shown by scrolling them on a 7-segment display. Which text to print on 7-segment displays has been chosen by using switches and has been adjusted the scroll speed of texts with the buttons. The main goal has been that this project was done by using the peripherals on the board. However, the project has been done via the internet browser using the CPUlator ARMv7 System Simulator. The advantage of using this simulation site was to use eight 7-segment displays. ASCII codes have been used to describe letters and numbers in this project. ASCII equivalent of the characters has been converted to hexadecimal and implemented in the project. Additionally, A9 private timer has been used as a timer in the project.\\
 	
 	Our design supports the characters provided in Figure \ref{supported_chars}.\\
 	
@@ -54,9 +53,6 @@ June 8, 2020}
 		\includegraphics[scale=.45]{../images/fig3.png}
 		\caption{Sample output on 7-segment displays for input "Mustafa Kemal Ataturk"}
 	\end{figure}
-	\section{Source Code}
-	\lstinputlisting[language={[ARM]Assembler}, frame=single, basicstyle=\ttfamily, breaklines=true, showspaces=false, showstringspaces=false, caption=Source code of our sliding text project]{../source_codes/final_code.s} \label{source_code}
-	\newpage
 	\section{Flowcharts}
 	\subsection{MAIN}
 	After the initialization, the program starts executing the \textit{Main} subroutine. It consists of chaining other subroutines sequentially such as  \textit{SET\_WORD}, \textit{CHECK\_PAUSE}, \textit{SET\_SPEED}, \textit{PRINT\_STRING}.
@@ -105,16 +101,15 @@ June 8, 2020}
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=.15]{../images/print_string.pdf}
-		\caption{Flowchart of Print String Method}
+		\caption{Flowchart of Print String Subroutine}
 	\end{figure}
 	\subsubsection{UPDATE\_LOCATION}
 	\begin{wrapfigure}{r}{0.4\textwidth}
 		\centering
 		\includegraphics[scale=.2]{../images/update_location.pdf}
-		\caption{Birds}
+		\caption{Flowchart of Update Location Subroutine}
 	\end{wrapfigure}
 	This subroutine determines which 7-segment to write next character. Given that there are jumps between memory locations of 7-segments and circular loop, it has been decided that its best to handle these operations in a different subroutine. First we set it to be the 7-segment that is right next to the previous one. Then we check if has exceeded any limits, if it did, reset the position accordingly.
-
 
 
 \end{document}
